@@ -69,4 +69,5 @@ def main():
     print(f" You played for {rounds} rounds!")
 
 if __name__ == "__main__":
+    money = 100
     main()
