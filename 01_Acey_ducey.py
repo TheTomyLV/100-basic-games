@@ -1,4 +1,5 @@
 import random
+from functions import *
 
 def format_card(card) -> str:
     suit = {1: "A", 11: "J", 12: "Q", 13: "K"}
@@ -32,11 +33,11 @@ class Deck:
         self.deck.pop(card-2)
         return delt_card
 
-def ask():
+def ask(curr_money):
     while True:
         try:
             answer = int(input(" How much are you betting!"))
-            if answer <= money:
+            if answer <= curr_money:
                 return answer
             else:
                 print(" You don't have that much, please bet less!")
@@ -45,18 +46,18 @@ def ask():
             pass
 
 def main():
-    global money
+    clearConsole()
+    money = 100
     print(f"Welcome to acey ducey!\nYou will be delt 2 random cards\nyou can bet your money\non wether the card will be between the 2 delt cards!\nYour starting amount is {money}$")
     rounds = 0
     while money > 0:
         rounds += 1
         deck = Deck()
         deck.deal()
-        bet = ask()
+        bet = ask(money)
         if bet == 0:
             print(" CHICKEN!!!")
             continue
-
         print(f" Your card was {deck.card3.face}!")
         if deck.card3.num > deck.card1.num and deck.card3.num < deck.card2.num:
             money += bet
@@ -68,5 +69,4 @@ def main():
     print(f" You played for {rounds} rounds!")
 
 if __name__ == "__main__":
-    money = 100
     main()
